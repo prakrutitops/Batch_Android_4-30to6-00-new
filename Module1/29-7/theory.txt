@@ -1,0 +1,41 @@
+Github
+
+1)Drag and drop
+2)Github Desktop
+3)Git CMD
+4)Android studio
+----------------------------------------------------------
+Setup:
+Android->Mobile Application Development Platfrom
+
+Lan: 
+1)Java
+2)Kotlin
+
+Software/Editor/IDE:
+1)Android Studio -> Android
+2)IntelIJIDEA ->Kotlin
+
+
+Steps:
+1)Download IntelIJIDEA
+https://www.jetbrains.com/idea/download/?section=windows
+[Download Community Version]
+
+2)Install it
+
+3)Download Plugin
+
+3)Create Kotlin Project
+
+
+datatype
+
+int ->numeric
+float->decmal[4 byte]
+char->single character 
+double->decimal[8 byte]
+String->""
+bool->true,false
+long->int lengthy value
+

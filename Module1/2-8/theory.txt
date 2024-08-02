@@ -1,0 +1,89 @@
+variable declare -var
+constant - val ->constant means you can not change the value
+
+fun main() -> main function 
+
+conditions:conditional statement
+if,else if,else,nestedif
+switch,case,break
+when statement
+
+
+
+if(condition)
+{
+	statement
+}
+else
+{
+	statement
+}
+
+Relational Op : <,>,<=,>=,==,!=
+
+
+a=5(assign)
+a==5(compare)
+
+a=5
+b=6
+
+a!=b(true)
+
+elseif
+
+if
+else if
+else if
+else if
+else if
+
+nested if
+-----------------------------------------
+input -> tops
+output -> tops4
+Lan -> C
+
+Terms & Condition
+1)do not use conditional statement
+2)do not use looping statement
+3)do not use pointer
+4)do not use functions
+5)do not declare any variable
+
+Loop
+1)for in loop
+2)while
+3)do while
+
+userinput
+
+!!
+?.
+
+var name:String ="a";
+
+4587
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

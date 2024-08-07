@@ -1,0 +1,22 @@
+Object Oriented Programming
+
+1)object:Any Entity which has own state and behaviour
+ex:pen,paper etc..
+
+2)class:collection of objects
+ex:human body
+
+3)abstraction:hiding internal details and showing functionalities
+ex:login form
+
+4)Encapsulation:wrapping up of data or binding of data
+ex:capsule
+
+5)inheritance:When one object acquire all the proeprties and behaviour of parent class
+ex:father-son
+
+6)polymorphism:Many ways to perform anything
+1)Overloading
+2)Overriding
+
+constructor:method having a same as a classname

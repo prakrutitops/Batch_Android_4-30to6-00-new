@@ -1,0 +1,28 @@
+Constructor: When method and class both names are same then its' called constructor
+
+1)primary constructor
+
+class Student()
+{
+}
+
+->only declares once
+
+
+2)secondary constructor
+
+value fix
+static keyword -> companion object
+
+class -> function/methods -> body part
+interface ->no body part
+
+
+
+
+
+
+
+
+
+

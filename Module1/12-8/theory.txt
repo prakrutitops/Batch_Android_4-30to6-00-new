@@ -1,0 +1,23 @@
+Polymorphism:Many ways to perform anything
+
+1)Method Overloading:When two or more methods having a same name but number of 
+paramters are diffrent
+
+2)Method Overriding:When two or more methods having a same name and number of
+parameters are also same
+
+keywords:
+super->call parent class value
+static->companion object
+this->refrence keyword which will refer to secondary constructor value
+final -> when you want to avoid something from change
+
+FileOutputStream->write
+FileInputStream->read
+
+Serializable
+outputstream -> write[serialize]
+inputstream -> read[deserialize]
+
+
+

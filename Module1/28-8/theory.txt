@@ -1,0 +1,58 @@
+Textview - text
+Imageview - image
+Listview - list
+
+list -> interface
+
+Collection :
+
+Class+Interface+Methods+Blocks
+
+Interface:
+1)List
+2)Set
+3)Map
+
+Class
+1)ArrayList
+2)LinkedList
+3)Vector
+4)Stack
+5)HashMap
+6)HashSet
+7)LinkedHashSet
+
+
+
+classes
+
+1)ArrayList:it stores the value as per the array's index and array's index starts
+with 0.
+
+methods:
+add->single element add
+addAll->whole list add
+remove->single element remove using name
+removeAt->element removed using index
+retainAll->find common data from two lists
+
+2)LinkedList:it stores the value from both the sides 
+1)singly linkedlist
+2)doubly linkedlist
+
+add
+addAll
+remove
+removeAt
+retainAll
+
+
+--------------------------------------------------------------------
+Set:Remove Duplicate Elements from list
+
+list = 1,2,5,6,1,2,3,5
+
+
+
+
+

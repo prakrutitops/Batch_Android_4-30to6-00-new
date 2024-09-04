@@ -1,0 +1,13 @@
+Intent: Switching from one activity to another activity
+
+var s1 = Student()
+var i = Intent()
+
+Types of Intent
+
+1)Explicit:Switching from one activity to another activity in same application
+
+2)Implciit:Switching from one activity to another activity between diffrent 
+application
+
+Splash Screen->loading screen

@@ -1,0 +1,38 @@
+Textview
+Imageview
+Edittext
+Checkbox
+RadioButton
+Ratingbar
+Seekbar
+Spinner
+Listview
+Searchview
+Customlist
+Gridview
+AlertDialog
+click event
+Splash Screen
+intent filter
+logo,name
+mediaplayer
+CustomDialog
+tablayout
+Autocompletetextview
+datepicker
+timepicker
+menus
+Progressbar
+Webview
+GridLayout
+TableLayout
+CustomLayout
+
+
+
+
+
+
+
+
+

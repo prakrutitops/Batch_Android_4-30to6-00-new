@@ -29,6 +29,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -113,48 +114,88 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun uploadImage(filePath: String) {
-        var name = edt1.text.toString()
-        var price = edt2.text.toString()
-        var des = edt3.text.toString()
-        var status = edt4.text.toString()
+        val name = edt1.text.toString()
+        val price = edt2.text.toString()
+        val des = edt3.text.toString()
+        val status = edt4.text.toString()
+
+        // Create the RequestBody for the other form data fields
+        val name1: RequestBody = RequestBody.create(MultipartBody.FORM, name)
+        val price1: RequestBody = RequestBody.create(MultipartBody.FORM, price)
+        val des1: RequestBody = RequestBody.create(MultipartBody.FORM, des)
+        val status1: RequestBody = RequestBody.create(MultipartBody.FORM, status)
+
+        // Get the actual image file from the URI
+        val file = File(filePath)
+
+        // Create RequestBody for the image file
+        val requestFile: RequestBody = RequestBody.create(contentResolver.getType(filepath)!!.toMediaTypeOrNull(), file)
+
+        // Create MultipartBody.Part for the image
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("pimage", file.name, requestFile)
+
+        // Make the Retrofit API call
+        val call: Call<ResponseBody?>? = apiinterface.uploaddata(name1, price1, des1, status1, body)
+
+        call!!.enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(call: Call<ResponseBody?>?, response: Response<ResponseBody?>?) {
+                if (response!!.isSuccessful) {
+                    Toast.makeText(applicationContext, "Upload Success", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(applicationContext, "Upload Failed: ${response.message()}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                Toast.makeText(applicationContext, "Fail: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
 
-        // val name1: RequestBody = create(MultipartBody.FORM,name)
-        val name1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, name)
-        val price1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, price)
-        val des1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, des)
-        val status1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, status)
 
-        var file = getpath(filepath)!!
-
-        val requestFile: RequestBody = RequestBody.Companion.create(
-            contentResolver.getType(filepath)!!.toMediaTypeOrNull(), file
-        )
-        val body = MultipartBody.Part.createFormData("pimage", "xyz", requestFile)
-
-
-
-    var call: Call<ResponseBody?>? = apiinterface.uploaddata(name1, price1, des1, status1, body)
-
-    call!!.enqueue(
-    object : Callback<ResponseBody?> {
-        override fun onResponse(
-            call: Call<ResponseBody?>,
-            response: Response<ResponseBody?>
-        ) {
-
-            Toast.makeText(applicationContext, "Success " + body, Toast.LENGTH_LONG).show()
-
-        }
-
-        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-
-            Toast.makeText(applicationContext, "Fail", Toast.LENGTH_LONG).show()
-
-        }
-
-    })
-}
+    //    private fun uploadImage(filePath: String) {
+//        var name = edt1.text.toString()
+//        var price = edt2.text.toString()
+//        var des = edt3.text.toString()
+//        var status = edt4.text.toString()
+//
+//
+//        // val name1: RequestBody = create(MultipartBody.FORM,name)
+//        val name1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, name)
+//        val price1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, price)
+//        val des1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, des)
+//        val status1: RequestBody = RequestBody.Companion.create(MultipartBody.FORM, status)
+//
+//        var file = getpath(filePath)!!
+//
+//        val requestFile: RequestBody = RequestBody.Companion.create(contentResolver.getType(filepath)!!.toMediaTypeOrNull(), file)
+//
+//        val body = MultipartBody.Part.createFormData("pimage", file.name, requestFile)
+//
+//
+//
+//    var call: Call<ResponseBody?>? = apiinterface.uploaddata(name1, price1, des1, status1, body)
+//
+//    call!!.enqueue(
+//    object : Callback<ResponseBody?> {
+//        override fun onResponse(
+//            call: Call<ResponseBody?>,
+//            response: Response<ResponseBody?>
+//        ) {
+//
+//            Toast.makeText(applicationContext, "Success " + body, Toast.LENGTH_LONG).show()
+//
+//        }
+//
+//        override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+//
+//            Toast.makeText(applicationContext, "Fail", Toast.LENGTH_LONG).show()
+//
+//        }
+//
+//    })
+//}
     private fun getpath(uri: Uri): String? {
         val cursor: Cursor? = contentResolver.query(uri, null, null, null, null)
         cursor?.use {

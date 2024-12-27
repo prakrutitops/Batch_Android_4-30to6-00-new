@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">ProjectEx1</string>
+    <string name="next">Next</string>
+    <string name="discover">Discover</string>
+    <string name="shop">Shop</string>
+    <string name="offers">Offers</string>
+    <string name="rewards">Rewards</string>
+    <string name="discover_text">Look for things around you</string>
+    <string name="shop_text"><![CDATA[Get the best Deals & Coupons]]></string>
+    <string name="offers_text">Find great offers while you discover</string>
+    <string name="rewards_text"><![CDATA[Free discount Coupons and more]]></string>
+    <string name="get_started">Get Started</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hey_there">Hey there,</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="already_have_an_account_login">Already have an account? <b>Login</b></string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="or_register_with">Or Register With</string>
+    <string name="register">Register</string>
+    <string name="by_continuing_you_accept_our_privacy_policy_and_terms_of_use">By continuing you accept our <u>Privacy Policy</u> and <u>Terms of Use</u></string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+    <string name="or_continue_with">Or Continue With</string>
+    <string name="don_t_have_an_account_yet_register">Don\'t have an account yet? <b>Register</b></string>
+    <string name="wishlist">WishList</string>
+    <string name="add_to_cart">Cart</string>
+    <string name="wishmenu">WishMenu</string>
+    <string name="cart_menu">Cart Menu</string>
+    <string name="remove_from_wishlist">Remove from Wishlist</string>
+    <string name="remove_from_cart">Remove From Cart</string>
+    <string name="logout">Logout</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="add_to_wishlist">Wishlist</string>
+    <string name="product_details">Product Details</string>
+    <string name="welcome_back">Welcome Back</string>
+</resources>

@@ -1,6 +1,8 @@
 package com.example.classproject.interfaces
 
 
+import com.example.projectex1.Model.CategoryModel
+import com.example.projectex1.Model.DashboardModel
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -30,5 +32,13 @@ interface ApiInterface
         @Field("user_phone") mobile: String?,
         @Field("user_password") password: String?
     ): Call<RegisterModel>
+
+    @GET("category_view.php")
+    fun category_viewdata() :Call<List<CategoryModel>>
+
+
+
+
+
 
 }

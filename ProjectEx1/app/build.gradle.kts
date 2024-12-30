@@ -48,6 +48,8 @@ dependencies {
     implementation ("com.airbnb.android:lottie:3.4.0")
     implementation ("com.squareup.retrofit2:retrofit:2.4.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.4.0")
+    implementation ("com.squareup.picasso:picasso:2.8")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

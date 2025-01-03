@@ -41,6 +41,7 @@ class DashboardAdapter(var context: Context,var list: MutableList<DashboardModel
     {
         holder.textView.setText(list.get(position).name)
         Picasso.get().load(list.get(position).url).into(holder.imageview2)
+
         holder.itemView.setOnClickListener {
 
             var i = Intent(context, CategoryViewActivity::class.java)

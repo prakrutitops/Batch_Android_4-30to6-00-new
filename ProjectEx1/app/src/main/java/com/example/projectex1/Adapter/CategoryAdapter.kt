@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.classproject.clients.ApiClient
 import com.example.classproject.interfaces.ApiInterface
+import com.example.projectex1.Activity.FullScreenActivity
 import com.example.projectex1.Model.CategoryModel
 import com.squareup.picasso.Picasso
 import retrofit2.Call
@@ -43,18 +44,18 @@ class CategoryAdapter(var context: Context,var list: MutableList<CategoryModel>)
 
         Picasso.get().load(list.get(position).url).into(holder.imageview2)
 
-//        holder.itemView.setOnClickListener {
-//
-//
-//            var intent = Intent(context, FullScreenActivity::class.java)
-//            intent.putExtra("image", list.get(position).url)
-//            intent.putExtra("name", list.get(position).name)
-//            intent.putExtra("desc", list.get(position).description)
-//            intent.putExtra("price", list.get(position).price)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            context.startActivity(intent)
-//
-//        }
+        holder.itemView.setOnClickListener {
+
+
+            var intent = Intent(context, FullScreenActivity::class.java)
+            intent.putExtra("image", list.get(position).url)
+            intent.putExtra("name", list.get(position).name)
+            intent.putExtra("desc", list.get(position).description)
+            intent.putExtra("price", list.get(position).price)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+
+        }
     }
 }
 class MyCategoryView(Itemview:View):RecyclerView.ViewHolder(Itemview)

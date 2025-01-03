@@ -3,6 +3,7 @@ package com.example.classproject.interfaces
 
 import com.example.projectex1.Model.CategoryModel
 import com.example.projectex1.Model.DashboardModel
+import com.example.projectex1.WishlistModel
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -33,12 +34,36 @@ interface ApiInterface
         @Field("user_password") password: String?
     ): Call<RegisterModel>
 
-    @GET("category_view.php")
-    fun category_viewdata() :Call<List<CategoryModel>>
+    @GET("dashboard_view.php")
+    fun dashboard_viewdata():Call<List<DashboardModel>>
+
+    @FormUrlEncoded
+    @POST("category_view.php")
+    fun categoryviewdata
+        (
+            @Field("data") data: Int?,
+        ): Call<List<CategoryModel>>
+
+//    @GET("wishlist_view.php")
+//    fun wishlistViewData(mob:String):Call<List<WishlistModel>>
 
 
+    @FormUrlEncoded
+    @POST("wishlist_view.php")
+    fun wishlistViewData
+                (
+        @Field("mobile") mobile: String?,
+    ): Call<List<WishlistModel>>
 
 
+    @FormUrlEncoded
+    @POST("add_data_to_wishlist.php")
+    fun wishadddetail(
+        @Field("gift_name") gift_name: String?,
+        @Field("gift_description") gift_description: String?,
+        @Field("gift_price") gift_price:String?,
+        @Field("image") image: String?,
+        @Field("mobile") mobile: String?,
 
-
+    ): Call<Void>
 }

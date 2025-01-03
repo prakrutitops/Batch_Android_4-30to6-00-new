@@ -22,58 +22,64 @@ import com.example.projectex1.DashboardAdapter
 import com.example.projectex1.LoginActivity
 import com.example.projectex1.Model.DashboardModel
 import com.example.projectex1.R
+import com.example.projectex1.WishlistAdapter
+import com.example.projectex1.WishlistModel
 import com.example.projectex1.databinding.ActivityDashboardBinding
+import com.example.projectex1.databinding.ActivityWishlistBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DashboardActivity : AppCompatActivity()
+class WishlistActivity : AppCompatActivity()
 {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var toolbar:Toolbar
-    private lateinit var binding: ActivityDashboardBinding
+    private lateinit var binding: ActivityWishlistBinding
     lateinit var apiInterface: ApiInterface
-    lateinit var list:MutableList<DashboardModel>
+    lateinit var list:MutableList<WishlistModel>
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        binding = ActivityWishlistBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        if (Build.VERSION.SDK_INT >= 21)
-        {
-            val window = this.window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = this.resources.getColor(R.color.bluegrey)
-        }
+//        if (Build.VERSION.SDK_INT >= 21)
+//        {
+//            val window = this.window
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//            window.statusBarColor = this.resources.getColor(R.color.bluegrey)
+//        }
 
         toolbar = findViewById(R.id.tool)
         setSupportActionBar(toolbar)
 
         sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
         Toast.makeText(applicationContext,"Welcome "+sharedPreferences.getString("mob",""), Toast.LENGTH_LONG).show()
+        var mob = sharedPreferences.getString("mob","");
 
         var layoutmanager :RecyclerView.LayoutManager = GridLayoutManager(applicationContext,2)
-        binding.recycler.layoutManager=layoutmanager
+        binding.recyclerView.layoutManager=layoutmanager
 
         apiInterface = ApiClient.getapiclient()!!.create(ApiInterface::class.java)
         list = ArrayList()
-       var call: Call<List<DashboardModel>> = apiInterface.dashboard_viewdata()
-        call.enqueue(object: Callback<List<DashboardModel>>
-        {
-            override fun onResponse(call: Call<List<DashboardModel>>, response: Response<List<DashboardModel>>)
-            {
-                list = response.body() as MutableList<DashboardModel>
 
-                var adapter = DashboardAdapter(applicationContext,list)
-                binding.recycler.adapter=adapter
+        var call: Call<List<WishlistModel>> = apiInterface.wishlistViewData(mob!!)
+
+        call.enqueue(object: Callback<List<WishlistModel>>
+        {
+            override fun onResponse(call: Call<List<WishlistModel>>, response: Response<List<WishlistModel>>)
+            {
+                list = response.body() as MutableList<WishlistModel>
+
+                var adapter = WishlistAdapter(applicationContext,list)
+                binding.recyclerView.adapter=adapter
 
             }
 
-            override fun onFailure(call: Call<List<DashboardModel>>, t: Throwable)
+            override fun onFailure(call: Call<List<WishlistModel>>, t: Throwable)
             {
                 Toast.makeText(applicationContext,"No Internet",Toast.LENGTH_LONG).show()
             }

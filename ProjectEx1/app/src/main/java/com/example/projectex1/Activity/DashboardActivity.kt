@@ -95,6 +95,17 @@ class DashboardActivity : AppCompatActivity()
     {
         when(item.itemId)
         {
+
+            R.id.wishlist->
+            {
+                startActivity(Intent(applicationContext, WishlistActivity::class.java))
+
+            }
+            R.id.cart->
+            {
+                startActivity(Intent(applicationContext, CartAcivity::class.java))
+
+            }
             R.id.logout->
             {
                 sharedPreferences.edit().clear().commit()
@@ -103,6 +114,10 @@ class DashboardActivity : AppCompatActivity()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
     }
 
 }

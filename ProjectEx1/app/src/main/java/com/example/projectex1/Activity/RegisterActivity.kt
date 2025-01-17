@@ -89,7 +89,9 @@ class RegisterActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     }
 
     override fun onBackPressed() {
+        finishAffinity()
         super.onBackPressed()
+
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {

@@ -1,6 +1,7 @@
 package com.example.classproject.interfaces
 
 
+import com.example.projectex1.CartModel
 import com.example.projectex1.Model.CategoryModel
 import com.example.projectex1.Model.DashboardModel
 import com.example.projectex1.WishlistModel
@@ -48,12 +49,7 @@ interface ApiInterface
 //    fun wishlistViewData(mob:String):Call<List<WishlistModel>>
 
 
-    @FormUrlEncoded
-    @POST("wishlist_view.php")
-    fun wishlistViewData
-                (
-        @Field("mobile") mobile: String?,
-    ): Call<List<WishlistModel>>
+
 
 
     @FormUrlEncoded
@@ -66,4 +62,33 @@ interface ApiInterface
         @Field("mobile") mobile: String?,
 
     ): Call<Void>
+
+    @FormUrlEncoded
+    @POST("viewwishlist.php")
+    fun wishlistViewData(
+        @Field("mobile") mobile: String?,
+    ): Call<List<WishlistModel>>
+
+    @FormUrlEncoded
+    @POST("deletewishlist.php")
+    fun deleteWishList(
+        @Field("id") id: Int
+    ): Call<Void>
+
+    @FormUrlEncoded
+    @POST("add_data_to_cart.php")
+    fun addDataToCart(
+        @Field("gift_name") gift_name: String?,
+        @Field("gift_description") gift_description: String?,
+        @Field("gift_price") gift_price:String?,
+        @Field("image") image: String?,
+        @Field("mobile") mobile: String?,
+    ): Call<Void>
+
+    @FormUrlEncoded
+    @POST("viewcart.php")
+    fun cartViewData(
+        @Field("mobile") mobile: String?,
+    ): Call<List<CartModel>>
+
 }

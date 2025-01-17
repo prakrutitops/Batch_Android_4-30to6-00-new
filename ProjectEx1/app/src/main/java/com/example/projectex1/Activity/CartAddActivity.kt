@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WishlistAddActivity : AppCompatActivity()
+class CartAddActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityWishlistAddBinding
     lateinit var apiInterface: ApiInterface
@@ -40,7 +40,7 @@ class WishlistAddActivity : AppCompatActivity()
 
         apiInterface = ApiClient.getapiclient()!!.create(ApiInterface::class.java)
 //
-       var call: Call<Void> = apiInterface.wishadddetail(g_name,g_desc,g_price,g_image,mob)
+       var call: Call<Void> = apiInterface.addDataToCart(g_name,g_desc,g_price,g_image,mob)
 //
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {

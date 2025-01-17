@@ -51,6 +51,13 @@ class FullScreenActivity : AppCompatActivity()
         }
         binding.cartButton.setOnClickListener {
 
+            var i = Intent(applicationContext,CartAddActivity::class.java)
+            i.putExtra("gift_name",giftName)
+            i.putExtra("gift_desc",giftDesc)
+            i.putExtra("gift_price",giftPrice)
+            i.putExtra("gift_image",image)
+            i.putExtra("mobile",data)
+            startActivity(i)
 
         }
 

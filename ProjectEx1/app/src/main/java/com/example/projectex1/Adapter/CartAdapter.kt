@@ -21,26 +21,28 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class WishlistAdapter(var context: Context?, var mutableList: MutableList<WishlistModel>) :
-    RecyclerView.Adapter<WishlistViewHolder>() {
+class CartAdapter(var context: Context?, var mutableList: MutableList<CartModel>) :
+    RecyclerView.Adapter<CartViewHolder>() {
 
     lateinit var apiInterface: ApiInterface
     lateinit var sharedPreferences: SharedPreferences
-    var itemClickListener: ItemClickListener?=null
 
+    companion object {
+        lateinit var itemClickListener: ItemClickListener
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.wishlist_adapter_layout, parent, false
         )
-        return WishlistViewHolder(view)
+        return CartViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return mutableList.size
     }
 
-    override fun onBindViewHolder(holder: WishlistViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(holder: CartViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         sharedPreferences = context!!
             .getSharedPreferences("user_session", Context.MODE_PRIVATE)
@@ -70,7 +72,7 @@ class WishlistAdapter(var context: Context?, var mutableList: MutableList<Wishli
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     mutableList.removeAt(position)
-                    itemClickListener!!.onItemClick(holder.adapterPosition, it)
+                    itemClickListener.onItemClick(holder.adapterPosition, it)
                     Toast.makeText(context, "Removed from wishlist", Toast.LENGTH_SHORT).show()
                 }
 
@@ -80,25 +82,25 @@ class WishlistAdapter(var context: Context?, var mutableList: MutableList<Wishli
             })
         }
 
-        holder.addToCartBtn.setOnClickListener {
-
-            val mob = sharedPreferences.getString("mob", "")
-
-            val call = apiInterface.addDataToCart(
-                giftName, giftDesc,
-                giftPrice, giftImage, mob
-            )
-            call.enqueue(object : Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
+//        holder.addToCartBtn.setOnClickListener {
+//
+//            val mob = sharedPreferences.getString("mob", "")
+//
+//            val call = apiInterface.addDataToCart(
+//                giftName, giftDesc,
+//                giftPrice, giftImage, mob
+//            )
+//            call.enqueue(object : Callback<Void> {
+//                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+//                    Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//
+//                override fun onFailure(call: Call<Void>, t: Throwable) {
+//                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//        }
     }
 
     interface ItemClickListener {
@@ -110,7 +112,7 @@ class WishlistAdapter(var context: Context?, var mutableList: MutableList<Wishli
     }
 }
 
-class WishlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val imageView: ImageView
     val textView1: MaterialTextView
     val textView2: MaterialTextView

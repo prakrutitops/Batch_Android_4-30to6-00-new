@@ -45,7 +45,7 @@ class CartAddActivity : AppCompatActivity()
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
 
-                startActivity(Intent(applicationContext, WishlistActivity::class.java))
+                startActivity(Intent(applicationContext, CartAcivity::class.java))
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable)

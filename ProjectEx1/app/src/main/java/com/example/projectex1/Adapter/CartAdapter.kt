@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.classproject.clients.ApiClient
 import com.example.classproject.interfaces.ApiInterface
+import com.example.projectex1.Activity.CartAcivity
+import com.example.projectex1.Activity.WishlistActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
@@ -28,12 +30,12 @@ class CartAdapter(var context: Context?, var mutableList: MutableList<CartModel>
     lateinit var sharedPreferences: SharedPreferences
 
     companion object {
-        lateinit var itemClickListener: ItemClickListener
+       // lateinit var itemClickListener: //ItemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.wishlist_adapter_layout, parent, false
+            R.layout.cart_adapter_layout, parent, false
         )
         return CartViewHolder(view)
     }
@@ -67,13 +69,16 @@ class CartAdapter(var context: Context?, var mutableList: MutableList<CartModel>
 //            context!!.startActivity(intent)
 //        }
 
-        holder.removeFromWishlistBtn.setOnClickListener {
-            val call = apiInterface.deleteWishList(myId)
+        holder.removeFromCartBtn.setOnClickListener {
+            val call = apiInterface.deleteCart(myId)
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     mutableList.removeAt(position)
-                    itemClickListener.onItemClick(holder.adapterPosition, it)
-                    Toast.makeText(context, "Removed from wishlist", Toast.LENGTH_SHORT).show()
+                    //itemClickListener.onItemClick(holder.adapterPosition, it)
+                    Toast.makeText(context, "Removed from cart", Toast.LENGTH_SHORT).show()
+                    var i = Intent(context, CartAcivity::class.java)
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context!!.startActivity(i)
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
@@ -103,27 +108,27 @@ class CartAdapter(var context: Context?, var mutableList: MutableList<CartModel>
 //        }
     }
 
-    interface ItemClickListener {
-        fun onItemClick(position: Int, view: View)
-    }
-
-    fun setOnItemClickListener(myClickListener: ItemClickListener) {
-        itemClickListener = myClickListener
-    }
+//    interface ItemClickListener {
+//        fun onItemClick(position: Int, view: View)
+//    }
+//
+//    fun setOnItemClickListener(myClickListener: ItemClickListener) {
+//        itemClickListener = myClickListener
+//    }
 }
 
 class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val imageView: ImageView
     val textView1: MaterialTextView
     val textView2: MaterialTextView
-    val addToCartBtn: MaterialButton
-    val removeFromWishlistBtn: MaterialButton
+    val removeFromCartBtn: MaterialButton
+    val makePayment:MaterialButton
 
     init {
         imageView = itemView.findViewById(R.id.imageView)
         textView1 = itemView.findViewById(R.id.tvName)
         textView2 = itemView.findViewById(R.id.tvPrice)
-        addToCartBtn = itemView.findViewById(R.id.addToCartBtn)
-        removeFromWishlistBtn = itemView.findViewById(R.id.removeFromWishlistBtn)
+        removeFromCartBtn = itemView.findViewById(R.id.removeFromCartBtn)
+        makePayment = itemView.findViewById(R.id.makePayment)
     }
 }

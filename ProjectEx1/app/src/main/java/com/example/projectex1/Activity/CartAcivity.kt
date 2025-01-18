@@ -1,5 +1,6 @@
 package com.example.projectex1.Activity
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +35,7 @@ class CartAcivity : AppCompatActivity()
         binding.mToolbar.title = "My Cart"
         setSupportActionBar(binding.mToolbar)
         binding.mToolbar.setNavigationOnClickListener {
-            super.finish()
+            startActivity(Intent(applicationContext,DashboardActivity::class.java))
 
 
         }

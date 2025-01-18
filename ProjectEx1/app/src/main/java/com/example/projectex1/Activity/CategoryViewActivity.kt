@@ -1,7 +1,9 @@
 package com.example.projectex1.Activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +43,15 @@ class CategoryViewActivity : AppCompatActivity()
         var pos = i.getIntExtra("pos",404)
         var pos2 = pos+1
         Toast.makeText(applicationContext, ""+pos2.toInt(), Toast.LENGTH_SHORT).show()
+
+
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            val window = this.window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.statusBarColor = this.resources.getColor(R.color.white)
+        }
 
         var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,2)
         binding.recycler.layoutManager=layoutManager

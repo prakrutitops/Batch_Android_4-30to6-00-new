@@ -91,4 +91,10 @@ interface ApiInterface
         @Field("mobile") mobile: String?,
     ): Call<List<CartModel>>
 
+    @FormUrlEncoded
+    @POST("deletecart.php")
+    fun deleteCart(
+        @Field("id") id: Int
+    ): Call<Void>
+
 }

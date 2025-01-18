@@ -30,6 +30,12 @@ class FullScreenActivity : AppCompatActivity()
         val giftDesc = intent.getStringExtra("desc")
         val giftPrice = intent.getStringExtra("price")
 
+        binding.mToolbar.setNavigationOnClickListener {
+            super.finish()
+
+
+        }
+
         Picasso.get().load(image).into(binding.imageView)
         binding.giftName.text = giftName
         binding.giftDesc.text = giftDesc

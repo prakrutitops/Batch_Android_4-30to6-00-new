@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.classproject.clients.ApiClient
 import com.example.classproject.interfaces.ApiInterface
+import com.example.projectex1.Activity.CartAcivity
+import com.example.projectex1.Activity.WishlistActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
@@ -70,8 +72,11 @@ class WishlistAdapter(var context: Context?, var mutableList: MutableList<Wishli
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     mutableList.removeAt(position)
-                    itemClickListener!!.onItemClick(holder.adapterPosition, it)
+                    //itemClickListener!!.onItemClick(holder.adapterPosition, it)
                     Toast.makeText(context, "Removed from wishlist", Toast.LENGTH_SHORT).show()
+                    var i = Intent(context, WishlistActivity::class.java)
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context!!.startActivity(i)
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
@@ -90,8 +95,24 @@ class WishlistAdapter(var context: Context?, var mutableList: MutableList<Wishli
             )
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show()
+
+                    val call2 = apiInterface.deleteWishList(myId)
+                    call2.enqueue(object:Callback<Void>{
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+
+                            var i = Intent(context, CartAcivity::class.java)
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context!!.startActivity(i)
+
+                        }
+
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            Toast.makeText(context, "Failed2", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
+
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {

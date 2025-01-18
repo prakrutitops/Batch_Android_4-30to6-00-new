@@ -1,5 +1,6 @@
 package com.example.projectex1.Activity
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,10 +33,11 @@ class WishlistActivity : AppCompatActivity()
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         // Setting up ActionBar
-        binding.tool.title = "My Wishlist"
-        setSupportActionBar(binding.tool)
-        binding.tool.setNavigationOnClickListener {
-            super.finish()
+        binding.mToolbar.title = "My Wishlist"
+        setSupportActionBar(binding.mToolbar)
+        binding.mToolbar.setNavigationOnClickListener {
+
+            startActivity(Intent(applicationContext,DashboardActivity::class.java))
 
 
         }

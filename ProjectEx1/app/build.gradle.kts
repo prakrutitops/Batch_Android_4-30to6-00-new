@@ -50,6 +50,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.4.0")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation("net.gotev:uploadservice:3.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

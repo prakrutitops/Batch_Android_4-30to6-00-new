@@ -97,4 +97,12 @@ interface ApiInterface
         @Field("id") id: Int
     ): Call<Void>
 
+    @FormUrlEncoded
+    @POST("adminlogin.php")
+    fun adminlogin(
+        @Field("username") mobile: String?,
+        @Field("password") password: String?
+    ): Call<RegisterModel>
+
+
 }

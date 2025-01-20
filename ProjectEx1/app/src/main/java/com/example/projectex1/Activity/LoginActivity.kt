@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classproject.clients.ApiClient
 import com.example.classproject.interfaces.ApiInterface
+import com.example.projectex1.Activity.AdminLoginActivity
 import com.example.projectex1.Activity.DashboardActivity
 import com.example.projectex1.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -105,7 +106,7 @@ class LoginActivity : AppCompatActivity()
 
         binding.textView3.setOnClickListener {
 
-            startActivity(Intent(applicationContext,RegisterActivity::class.java))
+            startActivity(Intent(applicationContext,AdminLoginActivity::class.java))
 
         }
 

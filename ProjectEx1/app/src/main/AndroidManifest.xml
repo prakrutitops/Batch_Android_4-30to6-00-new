@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -15,11 +18,26 @@
         android:theme="@style/Theme.ProjectEx1"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AdminLoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Activity.CartAcivity"
             android:exported="false" />
         <activity
             android:name=".Activity.WishlistActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activity.WishlistAddActivity"
             android:exported="false" />
@@ -40,15 +58,9 @@
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activity.CartAddActivity"/>
+        <activity android:name=".Activity.CartAddActivity" />
     </application>
 
 </manifest>

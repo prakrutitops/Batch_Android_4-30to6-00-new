@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import com.example.projectex1.Activity.AdminLoginActivity
 
 
 class SplashScreenActivity : AppCompatActivity()

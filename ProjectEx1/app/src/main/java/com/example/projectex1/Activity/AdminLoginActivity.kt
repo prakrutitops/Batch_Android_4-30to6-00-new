@@ -1,6 +1,8 @@
 package com.example.projectex1.Activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +23,7 @@ class AdminLoginActivity : AppCompatActivity()
 {
     lateinit var binding:ActivityAdminLoginBinding
     lateinit var apiInterface: ApiInterface
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,14 @@ class AdminLoginActivity : AppCompatActivity()
         val view = binding.root
         setContentView(view)
         apiInterface= ApiClient.getapiclient()!!.create(ApiInterface::class.java)
+
+        sharedPreferences = getSharedPreferences("admin_session", Context.MODE_PRIVATE)
+
+        if (sharedPreferences.getBoolean("admin_session", false) &&
+            sharedPreferences.getString("mob", "")!!.isNotEmpty()) {
+            startActivity(Intent(this, AdminDashboardActivity::class.java))
+            finish()
+        }
 
         binding.btnlogin.setOnClickListener {
 
@@ -42,10 +53,11 @@ class AdminLoginActivity : AppCompatActivity()
                     call: Call<RegisterModel>,
                     response: Response<RegisterModel>, )
                     {
-
+                        sharedPreferences.edit().putString("mob",uname).commit()
+                        sharedPreferences.edit().putBoolean("admin_session",true).commit()
 
                     Toast.makeText(applicationContext,"Success", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(applicationContext, AddCategoryActivity::class.java))
+                    startActivity(Intent(applicationContext, AdminDashboardActivity::class.java))
 
                 }
 

@@ -4,6 +4,7 @@ package com.example.classproject.interfaces
 import com.example.projectex1.CartModel
 import com.example.projectex1.Model.CategoryModel
 import com.example.projectex1.Model.DashboardModel
+import com.example.projectex1.Model.data2
 import com.example.projectex1.WishlistModel
 import retrofit2.Call
 import retrofit2.http.Field
@@ -37,6 +38,9 @@ interface ApiInterface
 
     @GET("dashboard_view.php")
     fun dashboard_viewdata():Call<List<DashboardModel>>
+
+    @GET("dashboard_view.php")
+    fun dashboard_viewdata2():Call<List<data2>>
 
     @FormUrlEncoded
     @POST("category_view.php")

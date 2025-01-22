@@ -6,12 +6,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="25dp"
     tools:context=".Activity.AdminDashboardActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
     <GridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:layout_margin="25dp"
+        android:horizontalSpacing="25dp"
+        />
 
 </LinearLayout>

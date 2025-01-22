@@ -22,7 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AdminDashboardActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.AddCategoryActivity"
             android:exported="false" />

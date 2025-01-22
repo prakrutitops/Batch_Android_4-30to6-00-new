@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.projectex1.Model.AdminDashboardModel
 import com.example.projectex1.R
+import com.google.android.material.textview.MaterialTextView
 
 
 class AdminDashboardAdapter(var context: Context, var list:MutableList<AdminDashboardModel>) : BaseAdapter()

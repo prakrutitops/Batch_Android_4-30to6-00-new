@@ -50,6 +50,7 @@ class AdminDashboardActivity : AppCompatActivity()
 
         list.add(AdminDashboardModel(R.drawable.baseline_add_box_24,"Add Category"))
         list.add(AdminDashboardModel(R.drawable.baseline_preview_24,"Add Product"))
+        list.add(AdminDashboardModel(R.drawable.baseline_preview_24,"View Orders"))
 
 
         var adapter = AdminDashboardAdapter(applicationContext,list)
@@ -64,6 +65,10 @@ class AdminDashboardActivity : AppCompatActivity()
             if(position==1)
             {
                 startActivity(Intent(applicationContext,AddProductActivity::class.java))
+            }
+            if(position==2)
+            {
+                startActivity(Intent(applicationContext,PaymentViewActivity::class.java))
             }
 
 

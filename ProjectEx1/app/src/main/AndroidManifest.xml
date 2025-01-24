@@ -18,6 +18,9 @@
         android:theme="@style/Theme.ProjectEx1"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.PaymentViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.PaymentActivity"
             android:exported="false" />
         <activity
@@ -31,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AdminLoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activity.CartAcivity"
             android:exported="false" />
@@ -80,6 +83,7 @@
             android:theme="@style/CheckoutTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <data
                     android:host="rzp.io"
                     android:scheme="io.rzp" />

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.classproject.clients.ApiClient
 import com.example.classproject.interfaces.ApiInterface
 import com.example.projectex1.Activity.CartAcivity
+import com.example.projectex1.Activity.PaymentActivity
 import com.example.projectex1.Activity.WishlistActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -85,6 +86,19 @@ class CartAdapter(var context: Context?, var mutableList: MutableList<CartModel>
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
             })
+        }
+
+        holder.makePayment.setOnClickListener {
+
+            val intent = Intent(context, PaymentActivity::class.java)
+            intent.putExtra("id",mutableList[position].id)
+            intent.putExtra("pName", mutableList[position].gift_name)
+            intent.putExtra("pPrice", mutableList[position].gift_price)
+            intent.putExtra("pDesc", mutableList[position].gift_description)
+            intent.putExtra("pImage", mutableList[position].image)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context!!.startActivity(intent)
+
         }
 
 //        holder.addToCartBtn.setOnClickListener {

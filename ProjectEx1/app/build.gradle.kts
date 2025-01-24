@@ -51,6 +51,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("com.github.chrisbanes:PhotoView:2.3.0")
     implementation("net.gotev:uploadservice:3.3")
+    implementation ("com.razorpay:checkout:1.6.4")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

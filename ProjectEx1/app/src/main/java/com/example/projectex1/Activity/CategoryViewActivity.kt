@@ -3,10 +3,13 @@ package com.example.projectex1.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,107 +27,108 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import tops.tech.batchproject_morning.RegisterModel
+class CategoryViewActivity : AppCompatActivity() {
 
-class CategoryViewActivity : AppCompatActivity()
-{
     private lateinit var binding: ActivityCategoryViewBinding
     lateinit var apiInterface: ApiInterface
-    lateinit var list:MutableList<CategoryModel>
+    lateinit var list: MutableList<CategoryModel>
     lateinit var call: Call<List<CategoryModel>>
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    var pos2 = 0
+    lateinit var adapter: CategoryAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCategoryViewBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setSupportActionBar(binding.tool)
 
         var i = intent
-        var pos = i.getIntExtra("pos",404)
-        var pos2 = pos+1
-        Toast.makeText(applicationContext, ""+pos2.toInt(), Toast.LENGTH_SHORT).show()
+        var pos = i.getIntExtra("pos", 404)
+        pos2 = pos + 1
+        Toast.makeText(applicationContext, "" + pos2.toInt(), Toast.LENGTH_SHORT).show()
 
-
-        if (Build.VERSION.SDK_INT >= 21)
-        {
+        if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.statusBarColor = this.resources.getColor(R.color.white)
         }
 
-        var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,2)
-        binding.recycler.layoutManager=layoutManager
-
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext, 2)
+        binding.recycler.layoutManager = layoutManager
 
         apiInterface = ApiClient.getapiclient()!!.create(ApiInterface::class.java)
 
         call = apiInterface.categoryviewdata(pos2)
-
-        call.enqueue(object: Callback<List<CategoryModel>>
-        {
-            override fun onResponse(call: Call<List<CategoryModel>>, response: Response<List<CategoryModel>>)
-            {
+        call.enqueue(object : Callback<List<CategoryModel>> {
+            override fun onResponse(call: Call<List<CategoryModel>>, response: Response<List<CategoryModel>>) {
                 list = response.body() as MutableList<CategoryModel>
-                Toast.makeText(applicationContext, ""+list.size, Toast.LENGTH_SHORT).show()
-                //Toast.makeText(applicationContext, ""+list.get(1), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "" + list.size, Toast.LENGTH_SHORT).show()
 
-                var adapter = CategoryAdapter(applicationContext,list)
-                binding.recycler.adapter=adapter
-
+                adapter = CategoryAdapter(applicationContext, list)
+                binding.recycler.adapter = adapter
             }
 
-            override fun onFailure(call: Call<List<CategoryModel>>, t: Throwable)
-            {
-                Toast.makeText(applicationContext,"No Internet",Toast.LENGTH_LONG).show()
+            override fun onFailure(call: Call<List<CategoryModel>>, t: Throwable) {
+                Toast.makeText(applicationContext, "No Internet", Toast.LENGTH_LONG).show()
             }
         })
 
+        // Set up the SearchView to filter the RecyclerView items
+        val searchView: SearchView = findViewById(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val filteredList = list.filter {
+                    it.name!!.contains(newText ?: "", ignoreCase = true) // filtering based on name
+                }
+                adapter.updateList(filteredList)
+                return true
+            }
+        })
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.ordermenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-    //
-//        var layoutManager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext,2)
-//        binding.recycler.layoutManager=layoutManager
-//
-//        apiInterface = ApiClient.getapiclient()!!.create(ApiInterface::class.java)
-//        list = ArrayList()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.i1 -> {
+                call = apiInterface.categorylowtohigh(pos2)
+                call.enqueue(object : Callback<List<CategoryModel>> {
+                    override fun onResponse(call: Call<List<CategoryModel>>, response: Response<List<CategoryModel>>) {
+                        list = response.body() as MutableList<CategoryModel>
+                        Toast.makeText(applicationContext, "" + list.size, Toast.LENGTH_SHORT).show()
+                        adapter.updateList(list)
+                    }
 
-//        if(pos==0)
-//        {
-//            call = apiInterface.books_viewdata()
-//        }
-//        if(pos==1)
-//        {
-//            call = apiInterface.clothescategory_viewdata()
-//        }
-//        if(pos==2)
-//        {
-//            call = apiInterface.elec_viewdata()
-//        }
-//        if(pos==3)
-//        {
-//            call = apiInterface.flower_viewdata()
-//        }
+                    override fun onFailure(call: Call<List<CategoryModel>>, t: Throwable) {
+                        Toast.makeText(applicationContext, "No Internet", Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+            R.id.i2 -> {
+                call = apiInterface.categoryhightolow(pos2)
+                call.enqueue(object : Callback<List<CategoryModel>> {
+                    override fun onResponse(call: Call<List<CategoryModel>>, response: Response<List<CategoryModel>>) {
+                        list = response.body() as MutableList<CategoryModel>
+                        Toast.makeText(applicationContext, "" + list.size, Toast.LENGTH_SHORT).show()
+                        adapter.updateList(list)
+                    }
 
-//        call.enqueue(object: Callback<List<CategoryModel>>
-//        {
-//            override fun onResponse(call: Call<List<CategoryModel>>, response: Response<List<CategoryModel>>)
-//            {
-//                list = response.body() as MutableList<CategoryModel>
-//
-//                var adapter = CategoryAdapter(applicationContext,list)
-//                binding.recycler.adapter=adapter
-//
-//            }
-//
-//            override fun onFailure(call: Call<List<CategoryModel>>, t: Throwable)
-//            {
-//                Toast.makeText(applicationContext,"No Internet",Toast.LENGTH_LONG).show()
-//            }
-//        })
-
-
-
+                    override fun onFailure(call: Call<List<CategoryModel>>, t: Throwable) {
+                        Toast.makeText(applicationContext, "No Internet", Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

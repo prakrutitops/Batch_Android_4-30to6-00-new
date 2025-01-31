@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity()
 
         binding.textView3.setOnClickListener {
 
-            startActivity(Intent(applicationContext,AdminLoginActivity::class.java))
+            startActivity(Intent(applicationContext,RegisterActivity::class.java))
 
         }
 

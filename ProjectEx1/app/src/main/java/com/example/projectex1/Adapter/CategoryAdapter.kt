@@ -19,52 +19,46 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+class CategoryAdapter(var context: Context, private var list: MutableList<CategoryModel>) : RecyclerView.Adapter<MyCategoryView>() {
 
+    private var filteredList: MutableList<CategoryModel> = list // this is the list that will be shown in the RecyclerView
 
-class CategoryAdapter(var context: Context,var list: MutableList<CategoryModel>):RecyclerView.Adapter<MyCategoryView>()
-
-
-{
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCategoryView {
-        var  layoutInflater= LayoutInflater.from(parent.context)
-        var view = layoutInflater.inflate(R.layout.design_categoryview,parent,false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.design_categoryview, parent, false)
         return MyCategoryView(view)
-
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredList.size
     }
 
-    override fun onBindViewHolder(holder: MyCategoryView , position: Int)
-    {
-        holder.textView.setText(list.get(position).name)
-        holder.textView2.setText(list.get(position).description)
-        holder.textView3.setText(list.get(position).price)
-
-        Picasso.get().load(list.get(position).url).into(holder.imageview2)
+    override fun onBindViewHolder(holder: MyCategoryView, position: Int) {
+        holder.textView.text = filteredList[position].name
+        holder.textView2.text = filteredList[position].description
+        holder.textView3.text = filteredList[position].price
+        Picasso.get().load(filteredList[position].url).into(holder.imageview2)
 
         holder.itemView.setOnClickListener {
-
-
-            var intent = Intent(context, FullScreenActivity::class.java)
-            intent.putExtra("image", list.get(position).url)
-            intent.putExtra("name", list.get(position).name)
-            intent.putExtra("desc", list.get(position).description)
-            intent.putExtra("price", list.get(position).price)
+            val intent = Intent(context, FullScreenActivity::class.java)
+            intent.putExtra("image", filteredList[position].url)
+            intent.putExtra("name", filteredList[position].name)
+            intent.putExtra("desc", filteredList[position].description)
+            intent.putExtra("price", filteredList[position].price)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
-
         }
     }
+
+    fun updateList(filteredList: List<CategoryModel>) {
+        this.filteredList = filteredList.toMutableList()
+        notifyDataSetChanged()
+    }
 }
-class MyCategoryView(Itemview:View):RecyclerView.ViewHolder(Itemview)
-{
+
+class MyCategoryView(Itemview: View) : RecyclerView.ViewHolder(Itemview) {
     var textView: TextView = Itemview.findViewById(R.id.category_txt)
     var imageview2: ImageView = Itemview.findViewById(R.id.category_img)
     var textView2: TextView = Itemview.findViewById(R.id.category_desc)
     var textView3: TextView = Itemview.findViewById(R.id.category_price)
-
-
-
 }

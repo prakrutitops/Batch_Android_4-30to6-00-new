@@ -104,7 +104,7 @@ class RegisterActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                     apiinterface = ApiClient.getapiclient()!!.create(ApiInterface::class.java)
 
                     val registercall: Call<Void> =
-                        apiinterface.registerdetail(fname, lname, gender, email, phone, pass)
+                        apiinterface.registerdetail(fname, lname, gender, email, phone, pass,"Usertype")
                     registercall.enqueue(object : Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
 

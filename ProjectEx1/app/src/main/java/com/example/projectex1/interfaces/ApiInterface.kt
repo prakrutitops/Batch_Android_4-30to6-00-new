@@ -27,6 +27,7 @@ interface ApiInterface
         @Field("user_email") email: String?,
         @Field("user_phone") mobile: String?,
         @Field("user_password") password: String?,
+        @Field("type") type: String?,
         ): Call<Void>
 
     //Login
@@ -123,6 +124,20 @@ interface ApiInterface
 
     @GET("paymentview.php")
     fun paymentview():Call<List<Payment>>
+
+    @FormUrlEncoded
+    @POST("ascorder.php")
+    fun categorylowtohigh
+                (
+        @Field("data") data: Int?,
+    ): Call<List<CategoryModel>>
+
+    @FormUrlEncoded
+    @POST("descorder.php")
+    fun categoryhightolow
+                (
+        @Field("data") data: Int?,
+    ): Call<List<CategoryModel>>
 
 }
 

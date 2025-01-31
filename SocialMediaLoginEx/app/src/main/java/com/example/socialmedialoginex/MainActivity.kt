@@ -69,12 +69,38 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
             Toast.makeText(applicationContext,""+account.email,Toast.LENGTH_LONG).show()
             //startActivity()
             var photo = account.photoUrl
-            var name = account.displayName
+            var name = account.displayName//fullname
             var email = account.email
+            var d1 = account.id
+            var d2 = account.account
+            var d3 = account.familyName//lastname
+            var d4 = account.givenName//firstname
 
-            Log.d("photo",photo.toString())
-            Log.d("name",name)
-            Log.d("email",email)
+//            val registercall: Call<Void> =
+//                apiinterface.registerdetail(d4, d3, null, email, null, null,'Google')
+//            registercall.enqueue(object : Callback<Void> {
+//                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+//
+//                    startActivity(Intent(applicationContext, LoginActivity::class.java))
+//                }
+//
+//                override fun onFailure(call: Call<Void>, t: Throwable) {
+//                    Toast.makeText(applicationContext, "No Internet", Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//            })
+
+
+            //var d5 = account.idToken
+
+//            Log.d("photo",photo.toString())
+//            Log.d("name1234",name)
+//            Log.d("email",email)
+//            Log.d("d1",d1)
+//            Log.d("d2",d2.toString())
+//            Log.d("d3",d3)
+//            Log.d("d4",d4)
+           // Log.d("d555",d5)
 
             // You can access user information like account.getDisplayName(), account.getEmail(), etc.
             // You can also send this information to your server for authentication.

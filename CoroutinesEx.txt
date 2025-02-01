@@ -1,0 +1,68 @@
+// In your app-level build.gradle file
+1.
+dependencies {
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+}
+
+2.
+import retrofit2.http.GET
+import kotlinx.coroutines.Deferred
+
+interface ApiService {
+
+    @GET("your_endpoint_here")
+    suspend fun getData(): Response<YourDataModel>  // 'suspend' means this function can be called within a coroutine
+
+}
+
+3.
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+object RetrofitInstance {
+
+    private const val BASE_URL = "https://yourapi.com/"
+
+    val api: ApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }
+}
+
+4.
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import retrofit2.Response
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Use lifecycleScope for coroutine execution in Activity/Fragment
+        lifecycleScope.launch {
+            try {
+                val response: Response<YourDataModel> = RetrofitInstance.api.getData()
+
+                if (response.isSuccessful) {
+                    // Handle the response
+                    val data = response.body()
+                    // Update UI with data
+                } else {
+                    // Handle error response (non-2xx status codes)
+                }
+            } catch (e: Exception) {
+                // Handle the exception (like network errors)
+            }
+        }
+    }
+}
